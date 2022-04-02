@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import '../App.css'
+import './Login.css'
 import Avatar from './img_avatar2.png'
 
 function Login () {
@@ -17,6 +17,7 @@ function Login () {
                 </div>
 
                 <label htmlFor="uname"><b>Username</b></label>
+
                 <input type='text' value={username} name='username' placeholder='Enter Username' required
                            onChange={e => setUsername(e.target.value)}/>
 
