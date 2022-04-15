@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route as RouteComponent,
-  Navigate,
 } from "react-router-dom";
 import { Layout } from "./components/layout";
 import { ProtectedRoute } from "./components/ProtectedRoute";
@@ -12,6 +11,8 @@ import { Route } from "./enums/Route";
 import { Route as RouteModel } from "./models/Route";
 import { User } from "./models/User";
 import { routes } from "./routes";
+import { Home } from "./screens/home";
+import { Login } from "./screens/login";
 
 const renderRoute = ({
   path,
@@ -24,9 +25,10 @@ const renderRoute = ({
       path={path}
       element={<Component />}
       authorizedRoles={authorizedRoles!}
+      key={path}
     />
   ) : (
-    <RouteComponent path={path} element={<Component />} />
+    <RouteComponent key={path} path={path} element={<Component />} />
   );
 
 const App = () => {
@@ -34,16 +36,15 @@ const App = () => {
   const LayoutComponent = user.isAuthenticated ? Layout : Fragment;
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
-      <LayoutComponent>
-        <Router>
+    <Router>
+      <UserContext.Provider value={{ user, setUser }}>
+        <LayoutComponent>
           <Routes>
             {routes.map((route: RouteModel) => renderRoute(route))}
-            <RouteComponent path="*" element={<Navigate to={Route.Home} />} />
           </Routes>
-        </Router>
-      </LayoutComponent>
-    </UserContext.Provider>
+        </LayoutComponent>
+      </UserContext.Provider>
+    </Router>
   );
 };
 

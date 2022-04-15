@@ -1,18 +1,39 @@
-import React, { FormEvent, useState } from "react";
+import React, { useState } from "react";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import Avatar from "../../assets/img_avatar2.png";
+import { UserContext } from "../../context/UserContext";
+import { Route } from "../../enums/Route";
+import UserService from "../../services/UserService";
 import "./main.css";
 
 export const Login = () => {
+  const { setUser, user } = useContext(UserContext);
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  function submitHandler(e: FormEvent<HTMLButtonElement>) {
+  const submitHandler = (e: any) => {
     e.preventDefault();
-  }
+    UserService.login(username, password)
+      .then(() => {
+        setUser({
+          ...user,
+          isAuthenticated: true,
+        });
+        navigate(Route.Home);
+      })
+      .catch(() => {
+        toast("Login failed! Please check your credentials and try again", {
+          type: "error",
+        });
+      });
+  };
 
   return (
     <div id="form-container">
-      <form className="loginForm">
+      <form className="loginForm" onSubmit={submitHandler}>
         <div className="imgcontainer">
           <img src={Avatar} alt="Avatar" className="avatar" />
         </div>
@@ -39,11 +60,9 @@ export const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button onSubmit={submitHandler}>Log In</button>
-        <span className="psw">
-          Forgot <a>password?</a>
-        </span>
+        <button type="submit">Log In</button>
       </form>
+      <ToastContainer />
     </div>
   );
 };
