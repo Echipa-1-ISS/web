@@ -31,6 +31,6 @@ export const ProtectedRoute = ({
   return isAuthorized ? (
     <RouteComponent {...rest} />
   ) : (
-    <Navigate to={Route.Home} />
+    <Navigate to={Route.Login} />
   );
 };

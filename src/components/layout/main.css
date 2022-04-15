@@ -8,4 +8,5 @@
 
 #layout-content {
   padding: 0 128px;
+  position: relative;
 }
