@@ -16,7 +16,7 @@ export const Profile = ({ name, age, email, url }: ProfileProps) => {
       <Card
         title={"Personal info: "}
         hoverable
-        style={{ width: 250 }}
+        style={{ width: 250, height: 400 }}
         cover={<Image width={250} src={url} />}
       >
         <Meta title={name} />

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import Avatar from "../../assets/img_avatar2.png";
+import Avatar from "../../assets/avatar.jpg";
 import { UserContext } from "../../context/UserContext";
 import { Route } from "../../enums/Route";
 import UserService from "../../services/UserService";

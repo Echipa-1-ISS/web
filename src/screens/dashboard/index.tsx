@@ -1,265 +1,123 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Profile } from "../../components/dashboard/UserProfile";
+import React, {useEffect, useState} from "react";
+import axios, {AxiosResponse} from "axios";
 import {
-  Layout,
-  Typography,
-  Avatar,
-  Menu,
-  Breadcrumb,
-  Card,
-  Dropdown,
+    Layout,
+    Menu,
 } from "antd";
-import { UserOutlined, InfoOutlined } from "@ant-design/icons";
+import {InfoOutlined} from "@ant-design/icons";
+import {DashboardContent} from "../../components/dashboard";
+import {CurriculumContent} from "../../components/curriculum";
+import {GradesContent} from "../../components/grades";
+import {UserHeader} from "../../components/layout/header";
+import {UserFooter} from "../../components/layout/footer";
+import UserService from "../../services/UserService";
+import {Route} from "../../enums/Route";
+import {useNavigate} from "react-router-dom";
 
-const { Header, Footer, Sider, Content } = Layout;
-const { Title } = Typography;
-const { SubMenu } = Menu;
+const {Sider, Content} = Layout;
+const {SubMenu} = Menu;
 
 export const Dashboard = () => {
-  const [name, getName] = useState("John");
-  const [age, getAge] = useState(23);
-  const [email, getEmail] = useState("johny99@yahoo.com");
-  const [picture, getPicture] = useState(
-    "https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528"
-  );
-  const [selectedMenuItem, setSelectedMenuItem] = useState("dashboard");
+        const [id] = useState(1);
+        const [name, setName] = useState("John");
+        const [age, setAge] = useState(23);
+        const [email, setEmail] = useState("johny99@yahoo.com");
+        const [picture, setPicture] = useState(
+            "https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528"
+        );
+        const [selectedMenuItem, setSelectedMenuItem] = useState("dashboard");
+        const navigate = useNavigate();
 
-  const backend_url = "http://localhost:8000/";
+        const fetchData = (e: any) => {
+            e.preventDefault();
+            UserService.getProfileInfo(id)
+                .then(({data: {name, age, email, picture}}: AxiosResponse<any>) => {
+                    setName(name);
+                    setAge(age);
+                    setEmail(email);
+                    setPicture(picture)
+                    navigate(Route.Dashboard);
+                })
+                .catch((error) => console.error(`Error: ${error}`));
+        };
+        /*
+        useEffect(() => {
+            fetchData();
+          }, []);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+          const fetchData = () => {
+            axios
+              .get(`${backend_url}.data`)
+              .then((response) => {
+                const name = response.data.name;
+                setName(name);
+                const age = response.data.age;
+                setAge(age);
+                const email = response.data.email;
+                setEmail(email);
+                const pic_url = response.data.url;
+                setPicture(pic_url);
+              })
+              .catch((error) => console.error(`Error: ${error}`));
+          };
+         */
 
-  const fetchData = () => {
-    axios
-      .get(`${backend_url}.data`)
-      .then((response) => {
-        const name = response.data.name;
-        getName(name);
-        const age = response.data.age;
-        getAge(age);
-        const email = response.data.email;
-        getEmail(email);
-        const pic_url = response.data.url;
-        getPicture(pic_url);
-      })
-      .catch((error) => console.error(`Error: ${error}`));
-  };
+        const dashboard = (
+            <DashboardContent name={name} age={age} email={email} url={picture}/>
+        );
 
-  const menu = (
-    <Menu style={{ width: 100, float: "right", marginTop: 40 }}>
-      <Menu.Item key="0">
-        <a href="#1">1st menu item</a>
-      </Menu.Item>
-      <Menu.Item key="1">
-        <a href="http://www.cs.ubbcluj.ro/about-the-faculty/departments/department-of-computer-science/">
-          Teachers
-        </a>
-      </Menu.Item>
-      <Menu.Divider />
-      <Menu.Item key="3">
-        <a href="#Logout">Log out</a>
-      </Menu.Item>
-    </Menu>
-  );
+        const curriculum = (
+            <CurriculumContent/>
+        );
 
-  const dashboard = (
-    <Content style={{ padding: "0 50px" }}>
-      <Breadcrumb style={{ margin: "16px 0" }}>
-        <Breadcrumb.Item>Log in</Breadcrumb.Item>
-        <Breadcrumb.Item>Home</Breadcrumb.Item>
-        <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
-      </Breadcrumb>
-      <div
-        className="site-layout-content"
-        style={{
-          minHeight: 800,
-          background: "#fff",
-          padding: 24,
-          display: "flex",
-          flexDirection: "row",
-        }}
-      >
-        <Profile name={name} age={age} email={email} url={picture} />
-        <Card
-          hoverable
-          title="Informatii"
-          style={{ width: 600, marginLeft: 100, height: 400 }}
-        >
-          <p>
-            Începând cu anul universitar 2020/2021, Universitatea Babeș-Bolyai
-            pune la dispoziție studenților săi pentru continuitatea activității
-            didactice, platforma online specifică activității de studiu
-            Microsoft Teams și adresa de email instituțională.. <br />
-            UBB în calitate de operator de date cu caracter personal a luat
-            toate măsurile pentru a vă asigura protejarea datelor cu caracter
-            personal în conformitate cu Regulamentul (UE) 2016/679 al
-            Parlamentului European şi al Consiliului din 27 aprilie 2016 privind
-            protecţia persoanelor fizice în ceea ce priveşte prelucrarea datelor
-            cu caracter personal şi privind libera circulaţie a acestor date
-            (GDPR) <br />
-            Pentru detalii suplimentare vă invităm să accesați secțiunea
-            dedicată protecției datelor cu carcater personal de pe site-ul UBB.
-            https://www.ubbcluj.ro/ro/politici/ <br />
-            Astfel, pentru continuitatea activității didactice, atât cadrele
-            didactice cât și studenții sunt rugați să folosească platforma
-            online specifică activității de studiu Microsoft Teams. <br />
-            Pentru accesarea acestei platforme aveti nevoie de următoarele date
-            de logare: Platforma: https://portal.office.com
-          </p>
-        </Card>
-        <Card
-          hoverable
-          title={"Eliberarea adeverinţelor de student"}
-          style={{ width: 400, marginLeft: 100, height: 450 }}
-        >
-          <p>
-            Pentru toţi studenţii Facultăţii de Matematică şi Informatică,
-            începând cu data de 27 septembrie 2021 se vor elibera adeverinţe de
-            student. Modalitatea de obţinere a adeverinţei de student este
-            următoarea: Studentul completează toate datele personale şi scopul
-            solicitării eliberării adeverinţei la formularul de la adresa:
-            https://forms.gle/drqqY8FqjsJA2hh7A, după care personalul
-            secretarial va emite adeverinţa care se trimite scanată la adresa de
-            email indicată de student. În situaţia în care, un student are
-            nevoie de mai multe adeverinţe, se va completa formularul de mai
-            multe ori. Dacă un student are nevoie de adeverinţa de student în
-            original va specifica acest aspect în formular şi o va putea ridica
-            de la Secretariatul facultăţii în orice zi lucrătoare în intervalul
-            orar 9,00-12,00.
-          </p>
-        </Card>
-      </div>
-    </Content>
-  );
+        const grade = (
+            <GradesContent/>
+        );
 
-  const curriculum = (
-    <Content style={{ padding: "0 50px" }}>
-      <Breadcrumb style={{ margin: "16px 0" }}>
-        <Breadcrumb.Item>Log in</Breadcrumb.Item>
-        <Breadcrumb.Item>Home</Breadcrumb.Item>
-        <Breadcrumb.Item>View Curriculum</Breadcrumb.Item>
-      </Breadcrumb>
-      <div
-        className="site-layout-content"
-        style={{
-          minHeight: 800,
-          background: "#fff",
-          padding: 24,
-          display: "flex",
-          flexDirection: "row",
-        }}
-      >
-        Soon curriculum
-      </div>
-    </Content>
-  );
+        const componentsSwitch = (key: any) => {
+            switch (key) {
+                case "dashboard":
+                    return dashboard;
+                case "curriculum":
+                    return curriculum;
+                case "grade":
+                    return grade;
+                default:
+                    break;
+            }
+        };
 
-  const enrol = (
-    <Content style={{ padding: "0 50px" }}>
-      <Breadcrumb style={{ margin: "16px 0" }}>
-        <Breadcrumb.Item>Log in</Breadcrumb.Item>
-        <Breadcrumb.Item>Home</Breadcrumb.Item>
-        <Breadcrumb.Item>Enrolment</Breadcrumb.Item>
-      </Breadcrumb>
-      <div
-        className="site-layout-content"
-        style={{
-          minHeight: 800,
-          background: "#fff",
-          padding: 24,
-          display: "flex",
-          flexDirection: "row",
-        }}
-      >
-        Soon enrol to a faculty
-      </div>
-    </Content>
-  );
-
-  const grade = (
-    <Content style={{ padding: "0 50px" }}>
-      <Breadcrumb style={{ margin: "16px 0" }}>
-        <Breadcrumb.Item>Log in</Breadcrumb.Item>
-        <Breadcrumb.Item>Home</Breadcrumb.Item>
-        <Breadcrumb.Item>View Grades</Breadcrumb.Item>
-      </Breadcrumb>
-      <div
-        className="site-layout-content"
-        style={{
-          minHeight: 800,
-          background: "#fff",
-          padding: 24,
-          display: "flex",
-          flexDirection: "row",
-        }}
-      >
-        Soon grades
-      </div>
-    </Content>
-  );
-
-  const componentsSwitch = (key: any) => {
-    switch (key) {
-      case "dashboard":
-        return dashboard;
-      case "curriculum":
-        return curriculum;
-      case "grade":
-        return grade;
-      case "enrol":
-        return enrol;
-      default:
-        break;
-    }
-  };
-
-  return (
-    <div id="dashboard">
-      <Layout>
-        <Header style={{ padding: 10 }}>
-          <Dropdown overlay={menu}>
-            <div onClick={(e) => e.preventDefault()}>
-              <Avatar
-                style={{ float: "right", marginRight: 30 }}
-                icon={<UserOutlined />}
-              />
+        return (
+            <div id="dashboard">
+                <Layout>
+                    <UserHeader name={name}/>
+                    <Layout>
+                        <Sider>
+                            <Menu
+                                mode={"inline"}
+                                selectedKeys={[selectedMenuItem]}
+                                onClick={(e) => setSelectedMenuItem(e.key)}
+                            >
+                                <Menu.Item key="dashboard">Dashboard</Menu.Item>
+                                <Menu.Item key={"curriculum"}>View Curriculum</Menu.Item>
+                                <Menu.Item key="grade">View Grades</Menu.Item>
+                                <SubMenu key={"aboutus"} icon={<InfoOutlined/>} title="About us">
+                                    <Menu.ItemGroup key={"title"} title={"title"}>
+                                        <Menu.Item key={"location1"}>Location 1</Menu.Item>
+                                        <Menu.Item key={"location2"}>Location 2</Menu.Item>
+                                    </Menu.ItemGroup>
+                                </SubMenu>
+                            </Menu>
+                        </Sider>
+                        <Layout>
+                            <Content style={{padding: "0 50px"}}>
+                                {componentsSwitch(selectedMenuItem)}
+                            </Content>
+                            <UserFooter/>
+                        </Layout>
+                    </Layout>
+                </Layout>
             </div>
-          </Dropdown>
-          <Title style={{ color: "white" }} level={3}>
-            {name}
-          </Title>
-        </Header>
-        <Layout>
-          <Sider>
-            <Menu
-              mode={"inline"}
-              selectedKeys={[selectedMenuItem]}
-              onClick={(e) => setSelectedMenuItem(e.key)}
-            >
-              <Menu.Item key="dashboard">Dashboard</Menu.Item>
-              <Menu.Item key={"enrol"}>Enrol</Menu.Item>
-              <Menu.Item key={"curriculum"}>View Curriculum</Menu.Item>
-              <Menu.Item key="grade">View Grades</Menu.Item>
-              <SubMenu key={"aboutus"} icon={<InfoOutlined />} title="About us">
-                <Menu.ItemGroup key={"title"} title={"title"}>
-                  <Menu.Item key={"location1"}>Location 1</Menu.Item>
-                  <Menu.Item key={"location2"}>Location 2</Menu.Item>
-                </Menu.ItemGroup>
-              </SubMenu>
-            </Menu>
-          </Sider>
-          <Layout>
-            <Content style={{ padding: "0 50px" }}>
-              {componentsSwitch(selectedMenuItem)}
-            </Content>
-            <Footer style={{ textAlign: "center" }}>
-              Academic-info ©2022 Created by Echipa1
-            </Footer>
-          </Layout>
-        </Layout>
-      </Layout>
-    </div>
-  );
-};
+        );
+    }
+;
