@@ -7,12 +7,9 @@ import {
 import { Layout } from "./components/layout";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { UserContext, getDefaultUser } from "./context/UserContext";
-import { Route } from "./enums/Route";
 import { Route as RouteModel } from "./models/Route";
 import { User } from "./models/User";
 import { routes } from "./routes";
-import { Home } from "./screens/home";
-import { Login } from "./screens/login";
 
 const renderRoute = ({
   path,
