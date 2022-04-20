@@ -18,7 +18,6 @@ const {Sider, Content} = Layout;
 const {SubMenu} = Menu;
 
 export const Dashboard = () => {
-        const [id] = useState(1);
         const [name, setName] = useState("John");
         const [age, setAge] = useState(23);
         const [email, setEmail] = useState("johny99@yahoo.com");
@@ -28,9 +27,9 @@ export const Dashboard = () => {
         const [selectedMenuItem, setSelectedMenuItem] = useState("dashboard");
         const navigate = useNavigate();
 
-        const fetchData = (e: any) => {
-            e.preventDefault();
-            UserService.getProfileInfo(id)
+        const fetchData = () => {
+            const userId = Number(localStorage.getItem("userId"));
+            UserService.getProfileInfo(userId)
                 .then(({data: {name, age, email, picture}}: AxiosResponse<any>) => {
                     setName(name);
                     setAge(age);
@@ -40,27 +39,8 @@ export const Dashboard = () => {
                 })
                 .catch((error) => console.error(`Error: ${error}`));
         };
-        /*
-        useEffect(() => {
-            fetchData();
-          }, []);
-
-          const fetchData = () => {
-            axios
-              .get(`${backend_url}.data`)
-              .then((response) => {
-                const name = response.data.name;
-                setName(name);
-                const age = response.data.age;
-                setAge(age);
-                const email = response.data.email;
-                setEmail(email);
-                const pic_url = response.data.url;
-                setPicture(pic_url);
-              })
-              .catch((error) => console.error(`Error: ${error}`));
-          };
-         */
+        
+        useEffect(() => {fetchData();},[fetchData]);
 
         const dashboard = (
             <DashboardContent name={name} age={age} email={email} url={picture}/>
