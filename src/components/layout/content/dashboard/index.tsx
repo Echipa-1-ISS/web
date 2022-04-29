@@ -5,16 +5,10 @@ import {Information} from "./InfoCard";
 import {StudentCertificate} from "./StudentCertificateCard";
 import {Content} from "antd/lib/layout/layout";
 
-export type ProfileProps = {
-    name: string;
-    age: number;
-    email: string;
-    url: string;
-};
 
-export const DashboardContent = ({ name, age, email, url }: ProfileProps) => {
+export const DashboardContent = () => {
     return (
-        <Content style={{ padding: "0 50px" }}>
+        <Content style={{ padding: "0 10px" }}>
             <Breadcrumb style={{ margin: "16px 0" }}>
                 <Breadcrumb.Item>Log in</Breadcrumb.Item>
                 <Breadcrumb.Item>Home</Breadcrumb.Item>
@@ -30,7 +24,7 @@ export const DashboardContent = ({ name, age, email, url }: ProfileProps) => {
                     flexDirection: "row",
                 }}
             >
-                <Profile name={name} age={age} email={email} url={url} />
+                <Profile/>
                 <Information/>
                 <StudentCertificate/>
             </div>

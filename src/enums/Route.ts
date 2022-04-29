@@ -1,5 +1,8 @@
+
 export enum Route {
   Home = "/home",
   Login = "/login",
-  Dashboard= "/dashboard"
+  Dashboard= "/dashboard",
+  Grades="/grades",
+  Curriculum="/curriculum",
 }

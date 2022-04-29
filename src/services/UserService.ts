@@ -14,7 +14,7 @@ class UserService {
             });
     }
 
-    public getProfileInfo(userId: number) {
+    public getInfo(userId: number) {
         return api
             .get(ApiEndpoints.userProfile, {params: {userId: userId}})
     }
