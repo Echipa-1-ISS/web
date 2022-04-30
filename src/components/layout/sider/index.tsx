@@ -23,6 +23,10 @@ export const Sider = () => {
         <CheckIcon />
         <span>Grades</span>
       </NavLink>
+      <NavLink to={Route.OptionalCourses} className="link">
+        <CheckIcon />
+        <span>Optional courses</span>
+      </NavLink>
     </div>
   );
 };

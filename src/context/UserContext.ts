@@ -5,6 +5,7 @@ import { User } from "../models/User";
 interface UserContextModel {
   user: User;
   setUser: (user: User) => void;
+  logout: () => void;
 }
 
 export const getDefaultUser = (): User => ({
@@ -12,11 +13,12 @@ export const getDefaultUser = (): User => ({
   role: Role.Student,
   displayName: "",
   email: "",
-  isAuthenticated: !!Number(localStorage.getItem("userId")),
+  isAuthenticated: localStorage.getItem("userId") !== null,
 });
 
 export const getDefaultUserContextModel = (): UserContextModel => ({
   setUser: () => {},
+  logout: () => {},
   user: getDefaultUser(),
 });
 

@@ -32,7 +32,7 @@ export const Profile = () => {
     };
 
     fetchData();
-  }, []);
+  }, [navigate]);
 
   return (
     <div>

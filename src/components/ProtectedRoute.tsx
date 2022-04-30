@@ -1,24 +1,20 @@
-import React, { useContext } from "react";
+import { useContext, PropsWithChildren } from "react";
 import { UserContext } from "../context/UserContext";
-import {
-  Navigate,
-  Route as RouteComponent,
-  RouteProps,
-} from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { Role } from "../enums/Role";
 import { useState } from "react";
 import { matchRole } from "../utils/auth";
 import { useEffect } from "react";
 import { Route } from "../enums/Route";
 
-interface ProtectedRouteProps extends RouteProps {
+interface ProtectedRouteProps {
   authorizedRoles: Role[];
 }
 
 export const ProtectedRoute = ({
   authorizedRoles,
-  ...rest
-}: ProtectedRouteProps) => {
+  children,
+}: PropsWithChildren<ProtectedRouteProps>) => {
   const { user } = useContext(UserContext);
   const [isAuthorized, setAuthorized] = useState(
     matchRole(authorizedRoles, user.role)
@@ -28,9 +24,8 @@ export const ProtectedRoute = ({
     setAuthorized(matchRole(authorizedRoles, user.role));
   }, [user.role, authorizedRoles]);
 
-  return isAuthorized ? (
-    <RouteComponent {...rest} />
-  ) : (
-    <Navigate to={Route.Login} />
-  );
+  if (!user.isAuthenticated || !isAuthorized)
+    return <Navigate to={Route.Login} />;
+
+  return <>{children}</>;
 };
