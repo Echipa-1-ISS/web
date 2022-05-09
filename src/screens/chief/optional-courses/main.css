@@ -1,4 +1,10 @@
-.ant-table-thead > tr >th{
+#table-content .ant-table-thead > tr > th {
     color: white;
-    background:#00152a !important;
+    background: #00152a !important;
+}
+
+#title-style{
+    text-align: center;
+    flex: 1;
+    color: #00152a;
 }

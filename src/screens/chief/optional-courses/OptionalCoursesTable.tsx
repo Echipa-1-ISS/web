@@ -38,6 +38,6 @@ export const OptionalCoursesTable = ({data}: { data: any }) => {
     ];
 
     return (
-        <Table dataSource={data} columns={table_columns}/>
+        <Table dataSource={data} columns={table_columns} id="table-content"/>
     );
 }

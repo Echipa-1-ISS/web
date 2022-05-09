@@ -16,7 +16,7 @@ export const GradesTable = ({data}: { data: any }) => {
     ];
 
     return (
-        <Table dataSource={data} pagination={false} columns={table_columns}>
+        <Table dataSource={data} pagination={false} columns={table_columns} id="table-content">
         </Table>
     );
 }

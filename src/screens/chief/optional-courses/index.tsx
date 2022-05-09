@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {OptionalCoursesTable} from "./OptionalCoursesTable";
-import {useNavigate} from "react-router-dom";
 import UserService from "../../../services/UserService";
 import {AxiosResponse} from "axios";
-import {Route} from "../../../enums/Route";
-import {Card} from "antd";
 import Title from "antd/lib/typography/Title";
+import './main.css'
 
 export const OptionalCoursesContent = () => {
 
@@ -33,27 +31,28 @@ export const OptionalCoursesContent = () => {
         },
     ]);
 
-    const navigate = useNavigate();
-
     useEffect(() => {
         const fetchData = () => {
             const userId = Number(localStorage.getItem("userId"));
+
             UserService.getInfo(userId)
                 .then(({data: {tableContent}}: AxiosResponse<any>) => {
                     setData(tableContent);
-                    navigate(Route.OptionalCourses);
                 })
-                .catch((error) => console.error(`Error: ${error}`));
+                .catch((error) =>
+                    console.error(`Error: ${error}`)
+                );
         };
 
         fetchData();
     }, []);
 
     return (
-        <><Title style={{
-            textAlign: "center",
-            flex: 1,
-            color: "#00152a",
-        }}>View Optional Courses</Title><OptionalCoursesTable data={data}/></>
+        <>
+            <Title id="title-style">
+                View Optional Courses
+            </Title>
+            <OptionalCoursesTable data={data}/>
+        </>
     );
 };
