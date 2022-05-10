@@ -1,38 +1,11 @@
 import { Button, Modal, Form, Input, Select, Row, Col } from "antd";
-import { useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AddOptionalCourseFormModel } from "./types";
+import api from "../../../api";
+import { ApiEndpoints } from "../../../api/endpoints";
+import { UserContext } from "../../../context/UserContext";
 
 const requiredField = { required: true, message: "This field is required" };
-
-const semesters = [
-  {
-    label: "1st semester, 1st year",
-    value: 1,
-  },
-  {
-    label: "2nd semester, 1st year",
-    value: 2,
-  },
-  {
-    label: "1st semester, 2nd year",
-    value: 3,
-  },
-];
-
-const specializations = [
-  {
-    label: "Mathematics",
-    value: 1,
-  },
-  {
-    label: "Informatics",
-    value: 2,
-  },
-  {
-    label: "Design",
-    value: 3,
-  },
-];
 
 interface AddOptionalCourseModalProps {
   visible: boolean;
@@ -46,9 +19,15 @@ export const AddOptionalCourseModal = ({
   onCancel,
 }: AddOptionalCourseModalProps) => {
   const [form] = Form.useForm();
+  const [semesters, setSemesters] = useState([]);
+  const [specializations, setSpecializations] = useState([]);
+  const { user } = useContext(UserContext);
 
   const handleSubmit = (data: AddOptionalCourseFormModel) => {
-    console.log(data);
+    api.post(ApiEndpoints.courses.addOptionalCourse, {
+      ...data,
+      userId: user.id,
+    });
     onOk();
   };
 
@@ -57,6 +36,21 @@ export const AddOptionalCourseModal = ({
 
     form.resetFields();
   }, [visible, form]);
+
+  useEffect(() => {
+    api
+      .get<any>(ApiEndpoints.courses.getSemestersAndSpecializations)
+      .then(({ data }) => {
+        setSemesters(
+          data.semesters.map((x: any) => ({
+            id: x.id,
+            name: `Year ${x.universityYear}, Semester ${x.semesterDetails}`,
+          }))
+        );
+
+        setSpecializations(data.specializations);
+      });
+  }, []);
 
   return (
     <Modal
@@ -74,15 +68,21 @@ export const AddOptionalCourseModal = ({
         <Form.Item label="Course name" name="name" rules={[requiredField]}>
           <Input />
         </Form.Item>
-        <Form.Item label="Semester" name="semester" rules={[requiredField]}>
-          <Select options={semesters} />
+        <Form.Item label="Semester" name="semesterId" rules={[requiredField]}>
+          <Select
+            options={semesters}
+            fieldNames={{ value: "id", label: "name" }}
+          />
         </Form.Item>
         <Form.Item
           label="Specialization"
-          name="specialization"
+          name="specializationId"
           rules={[requiredField]}
         >
-          <Select options={specializations} />
+          <Select
+            options={specializations}
+            fieldNames={{ value: "id", label: "name" }}
+          />
         </Form.Item>
         <Row>
           <Col span={6} offset={18}>
