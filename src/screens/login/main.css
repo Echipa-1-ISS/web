@@ -18,8 +18,8 @@
   gap: 12px;
 }
 
-input[type="text"],
-input[type="password"] {
+input.login-item[type="text"],
+input.login-item[type="password"] {
   padding: 12px 20px;
   margin-bottom: 8px;
   border: 1px solid #ccc;
@@ -27,7 +27,7 @@ input[type="password"] {
   width: 50%;
 }
 
-button {
+button#login-button {
   background-color: #00152a; /*#8cc051;*/
   color: white;
   padding: 12px 20px;
@@ -38,8 +38,8 @@ button {
   border-radius: 4px;
 }
 
-button:hover {
-  background-color: #012040;/*#8cc100;*/
+button#login-button:hover {
+  background-color: #012040; /*#8cc100;*/
 }
 
 .imgcontainer {

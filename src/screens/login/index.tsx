@@ -6,6 +6,7 @@ import Avatar from "../../assets/avatar.jpg";
 import { UserContext } from "../../context/UserContext";
 import { Route } from "../../enums/Route";
 import UserService from "../../services/UserService";
+
 import "./main.css";
 
 export const Login = () => {
@@ -41,6 +42,7 @@ export const Login = () => {
           <b>Username</b>
         </label>
         <input
+          className="login-item"
           type="text"
           value={username}
           name="username"
@@ -52,6 +54,7 @@ export const Login = () => {
           <b>Password</b>
         </label>
         <input
+          className="login-item"
           type="password"
           value={password}
           name="password"
@@ -60,7 +63,9 @@ export const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button type="submit">Log In</button>
+        <button id="login-button" type="submit">
+          Log In
+        </button>
       </form>
       <ToastContainer />
     </div>

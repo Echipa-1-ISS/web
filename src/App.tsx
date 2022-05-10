@@ -18,10 +18,13 @@ const renderRoute = ({
   authorizedRoles,
 }: RouteModel) =>
   isProtected ? (
-    <ProtectedRoute
+    <RouteComponent
       path={path}
-      element={<Component />}
-      authorizedRoles={authorizedRoles!}
+      element={
+        <ProtectedRoute authorizedRoles={authorizedRoles!}>
+          <Component />
+        </ProtectedRoute>
+      }
       key={path}
     />
   ) : (
@@ -32,9 +35,14 @@ const App = () => {
   const [user, setUser] = useState<User>(getDefaultUser());
   const LayoutComponent = user.isAuthenticated ? Layout : Fragment;
 
+  const handleLogout = () => {
+    localStorage.clear();
+    setUser(getDefaultUser());
+  };
+
   return (
     <Router>
-      <UserContext.Provider value={{ user, setUser }}>
+      <UserContext.Provider value={{ user, setUser, logout: handleLogout }}>
         <LayoutComponent>
           <Routes>
             {routes.map((route: RouteModel) => renderRoute(route))}
