@@ -8,4 +8,7 @@ export const ApiEndpoints = {
     getOptionalCourses: "/Courses/getOptionalCourses",
     approveCourse: "/Courses/approveCourse",
   },
+  contract: {
+    base: "/Contract",
+  },
 };

@@ -1,7 +1,16 @@
 .site-layout-content {
-    min-height: 800px;
-    background-color: #fff;
-    padding: 24px;
-    display: flex;
-    flex-direction: row;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 64px;
+}
+
+.year-select {
+  margin-bottom: 32px;
+  max-width: 320px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 12px;
 }

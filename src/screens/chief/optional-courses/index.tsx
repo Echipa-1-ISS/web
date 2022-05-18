@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Title from "antd/lib/typography/Title";
 import "./main.css";
 import api from "../../../api";
 import { ApiEndpoints } from "../../../api/endpoints";
@@ -17,9 +16,11 @@ export const OptionalCoursesContent = () => {
   const [isOpen, setOpen] = useState(false);
 
   const fetchData = () => {
+    setLoading(true);
     api
       .get<OptionalCourse[]>(ApiEndpoints.courses.getOptionalCourses)
-      .then(({ data }) => setCourses(data));
+      .then(({ data }) => setCourses(data))
+      .finally(() => setLoading(false));
   };
 
   useEffect(() => {
@@ -39,6 +40,7 @@ export const OptionalCoursesContent = () => {
         columns={getColumns(tryApproveOptionalCourse)}
         className="table-content"
         pagination={false}
+        loading={isLoading}
       />
       <ApproveCourseModal
         visible={isOpen}
