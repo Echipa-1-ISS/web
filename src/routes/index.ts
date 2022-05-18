@@ -5,6 +5,7 @@ import { Dashboard } from "../screens/dashboard";
 import { GradesContent } from "../screens/student/grades";
 import { CurriculumContent } from "../screens/student/curriculum";
 import { OptionalCourses } from "../screens/teacher/optional-courses";
+import { OptionalCoursesContent } from "../screens/chief/optional-courses";
 
 export const routes: RouteConfig[] = [
   {
@@ -30,5 +31,9 @@ export const routes: RouteConfig[] = [
     path: Route.OptionalCourses,
     component: OptionalCourses,
     isProtected: true,
+  },
+  {
+    path: Route.OptionalCourses,
+    component: OptionalCoursesContent,
   },
 ];
