@@ -5,5 +5,7 @@ export const ApiEndpoints = {
     getSemestersAndSpecializations: "/Courses/semestersAndSpecializations",
     addOptionalCourse: "/Courses/addOptional",
     getCourses: "/Courses/getCourses",
+    getOptionalCourses: "/Courses/getOptionalCourses",
+    approveCourse: "/Courses/approveCourse",
   },
 };

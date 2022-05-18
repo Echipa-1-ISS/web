@@ -1,8 +1,4 @@
 import { Table } from "antd";
-import { useContext, useEffect, useState } from "react";
-import api from "../../../api";
-import { ApiEndpoints } from "../../../api/endpoints";
-import { UserContext } from "../../../context/UserContext";
 import { TeacherCourse } from "../../../models/TeacherCourses";
 import { columns } from "./columns";
 

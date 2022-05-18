@@ -1,54 +1,54 @@
 import React, { useEffect, useState } from "react";
-import { OptionalCoursesTable } from "./OptionalCoursesTable";
-import UserService from "../../../services/UserService";
-import { AxiosResponse } from "axios";
 import Title from "antd/lib/typography/Title";
 import "./main.css";
+import api from "../../../api";
+import { ApiEndpoints } from "../../../api/endpoints";
+import { OptionalCourse } from "../../../models/OptionalCourse";
+import { Table } from "antd";
+import { getColumns } from "./columns";
+import { ApproveCourseModal } from "./ApproveCourseModal";
 
 export const OptionalCoursesContent = () => {
-  const [data, setData] = useState([
-    {
-      disciplineName: "OOP",
-      teacherName: "Gabi Mircea",
-      semester: 2,
-      year: 1,
-      specialization: "Computer Science",
-    },
-    {
-      disciplineName: "FP",
-      teacherName: "Gabi Mircea",
-      semester: 2,
-      year: 1,
-      specialization: "Computer Science",
-    },
-    {
-      disciplineName: "MPP",
-      teacherName: "Gabi Mircea",
-      semester: 2,
-      year: 1,
-      specialization: "Computer Science",
-    },
-  ]);
+  const [courses, setCourses] = useState<OptionalCourse[]>([]);
+  const [isLoading, setLoading] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState<
+    OptionalCourse | undefined
+  >();
+  const [isOpen, setOpen] = useState(false);
+
+  const fetchData = () => {
+    api
+      .get<OptionalCourse[]>(ApiEndpoints.courses.getOptionalCourses)
+      .then(({ data }) => setCourses(data));
+  };
 
   useEffect(() => {
-    const fetchData = () => {
-      const userId = Number(localStorage.getItem("userId"));
-
-      //TODO CourseService
-      UserService.getInfo(userId)
-        .then(({ data: { tableContent } }: AxiosResponse<any>) => {
-          setData(tableContent);
-        })
-        .catch((error) => console.error(`Error: ${error}`));
-    };
-
     fetchData();
   }, []);
 
+  const tryApproveOptionalCourse = (course: OptionalCourse) => {
+    setSelectedCourse(course);
+    setOpen(true);
+  };
+
   return (
     <>
-      <Title id="title-style">View Optional Courses</Title>
-      <OptionalCoursesTable data={data} />
+      <h2 className="page-title">Approve optional courses</h2>
+      <Table
+        dataSource={courses}
+        columns={getColumns(tryApproveOptionalCourse)}
+        className="table-content"
+        pagination={false}
+      />
+      <ApproveCourseModal
+        visible={isOpen}
+        onOk={() => {
+          setOpen(false);
+          fetchData();
+        }}
+        onCancel={() => setOpen(false)}
+        course={selectedCourse}
+      />
     </>
   );
 };

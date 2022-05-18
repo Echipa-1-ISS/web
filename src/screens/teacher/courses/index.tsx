@@ -42,7 +42,7 @@ export const Courses = () => {
         type="primary"
         className="add-button"
         size="large"
-        disabled={isLoading || optionalCoursesCount == 2}
+        disabled={isLoading || optionalCoursesCount === 2}
         icon={<IoMdAddCircleOutline size={24} />}
         onClick={() => setOpen(true)}
       >
