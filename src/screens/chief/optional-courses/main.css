@@ -1,9 +1,9 @@
-#table-content .ant-table-thead > tr > th {
-    color: white;
+.table-content .ant-table-thead > tr > th {
+    color: #fff;
     background: #00152a !important;
 }
 
-#title-style{
+#title-style {
     text-align: center;
     flex: 1;
     color: #00152a;

@@ -35,6 +35,7 @@ export const OptionalCoursesContent = () => {
         const fetchData = () => {
             const userId = Number(localStorage.getItem("userId"));
 
+            //TODO CourseService
             UserService.getInfo(userId)
                 .then(({data: {tableContent}}: AxiosResponse<any>) => {
                     setData(tableContent);

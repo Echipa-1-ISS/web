@@ -1,8 +1,8 @@
-import { Table } from 'antd';
+import {Table} from 'antd';
 
 //One grade per discipline
 export const GradesTable = ({data}: { data: any }) => {
-    const table_columns=[
+    const table_columns = [
         {
             key: 1,
             title: 'Discipline',
@@ -16,7 +16,6 @@ export const GradesTable = ({data}: { data: any }) => {
     ];
 
     return (
-        <Table dataSource={data} pagination={false} columns={table_columns} id="table-content">
-        </Table>
+        <Table dataSource={data} pagination={false} columns={table_columns} className="table-content"/>
     );
 }

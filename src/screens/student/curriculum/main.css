@@ -5,12 +5,3 @@
     display: flex;
     flex-direction: row;
 }
-
-#optional-courses-style {
-    margin-left: 5%;
-    height: 100%;
-}
-
-#grades-card-style {
-    height: 100%;
-}

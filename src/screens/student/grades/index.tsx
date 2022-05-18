@@ -42,18 +42,19 @@ export const GradesContent = () => {
         fetchData();
     }, []);
 
-
-    //TODO <OptionalCoursesContent/> must be replaced with optionalCourses from student's year and semester
     return (
         <div className="site-layout-content">
-            <Card title="Grades: " hoverable className="card-style">
+            <Card
+                title="Grades: "
+                hoverable
+                id="grades-card-style"
+            >
                 <GradesTable data={data}/>
             </Card>
 
             <Card
                 title="Optional courses: "
                 hoverable
-                className="card-style"
                 id="optional-courses-style"
             >
                 <OptionalCoursesContent/>

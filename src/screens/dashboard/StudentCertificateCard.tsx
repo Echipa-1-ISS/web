@@ -6,7 +6,8 @@ export const StudentCertificate = () => {
         <Card
             hoverable
             title={"Issuing Student Certificates"}
-            style={{ width: 400, marginLeft: 100, height: 400, overflow: "auto" }}
+            id='certificate-card-style'
+            className="card-style"
         >
             <p>
                 For all students of the Faculty of Mathematics and Computer Science,

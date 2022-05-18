@@ -1,10 +1,9 @@
-import { Table } from 'antd';
-import "./main.css"
-import { AlignType } from 'rc-table/lib/interface';
+import {Table} from 'antd';
+import {AlignType} from 'rc-table/lib/interface';
 
 
 export const OptionalCoursesTable = ({data}: { data: any }) => {
-    const table_columns=[
+    const table_columns = [
         {
             key: 1,
             title: 'Discipline',
@@ -38,6 +37,6 @@ export const OptionalCoursesTable = ({data}: { data: any }) => {
     ];
 
     return (
-        <Table dataSource={data} columns={table_columns} id="table-content"/>
+        <Table dataSource={data} columns={table_columns} className="table-content"/>
     );
 }
