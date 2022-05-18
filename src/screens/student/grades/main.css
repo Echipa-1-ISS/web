@@ -1,0 +1,16 @@
+.site-layout-content {
+    min-height: 800px;
+    background-color: #fff;
+    padding: 24px;
+    display: flex;
+    flex-direction: row;
+}
+
+#optional-courses-style {
+    margin-left: 5%;
+    height: 100%;
+}
+
+#grades-card-style {
+    height: 100%;
+}

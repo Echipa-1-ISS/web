@@ -19,7 +19,7 @@ export const UserHeader = ({ name }: { name?: string }) => {
   };
 
   const menu = (
-    <Menu style={{ width: 100, float: "right", marginTop: 40 }}>
+    <Menu id="menu-style">
       <Menu.Item key="0">
         <a href="#1">1st menu item</a>
       </Menu.Item>
@@ -36,16 +36,16 @@ export const UserHeader = ({ name }: { name?: string }) => {
   );
 
   return (
-    <Header id="header">
+    <Header id="header-style">
       <Dropdown overlay={menu}>
         <div onClick={(e) => e.preventDefault()}>
           <Avatar
-            style={{ float: "right", marginRight: 30 }}
+            className="avatar-style"
             icon={<UserOutlined />}
           />
         </div>
       </Dropdown>
-      <Title style={{ color: "white", marginBottom: 0 }} level={3}>
+      <Title className="title-style" level={3}>
         Hello, {name ?? "there"}
       </Title>
     </Header>
