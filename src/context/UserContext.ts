@@ -10,7 +10,7 @@ interface UserContextModel {
 
 export const getDefaultUser = (): User => ({
   id: Number(localStorage.getItem("userId")) ?? 0,
-  role: Role.Student,
+  role: Number(localStorage.getItem("role")) ?? Role.Student,
   displayName: "",
   email: "",
   isAuthenticated: localStorage.getItem("userId") !== null,

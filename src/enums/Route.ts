@@ -3,5 +3,6 @@ export enum Route {
   Home = "/home",
   Grades = "/grades",
   Curriculum = "/curriculum",
+  Courses = "/courses",
   OptionalCourses = "/optional-courses",
 }

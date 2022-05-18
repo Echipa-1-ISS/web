@@ -4,8 +4,9 @@ import { Login } from "../screens/login";
 import { Dashboard } from "../screens/dashboard";
 import { GradesContent } from "../screens/student/grades";
 import { CurriculumContent } from "../screens/student/curriculum";
-import { OptionalCourses } from "../screens/teacher/optional-courses";
+import { Courses } from "../screens/teacher/courses";
 import { OptionalCoursesContent } from "../screens/chief/optional-courses";
+import { Role } from "../enums/Role";
 
 export const routes: RouteConfig[] = [
   {
@@ -29,11 +30,14 @@ export const routes: RouteConfig[] = [
   },
   {
     path: Route.OptionalCourses,
-    component: OptionalCourses,
+    component: OptionalCoursesContent,
     isProtected: true,
+    authorizedRoles: [Role.DepartmentChief],
   },
   {
-    path: Route.OptionalCourses,
-    component: OptionalCoursesContent,
+    path: Route.Courses,
+    component: Courses,
+    isProtected: true,
+    authorizedRoles: [Role.Teacher, Role.DepartmentChief],
   },
 ];

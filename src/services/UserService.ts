@@ -6,11 +6,12 @@ class UserService {
   public login(username: string, password: string) {
     return api
       .post(ApiEndpoints.login, { username, password })
-      .then(({ data: { userId, token } }: AxiosResponse<any>) => {
+      .then(({ data: { token, ...rest } }: AxiosResponse<any>) => {
         localStorage.setItem("access_token", token);
-        localStorage.setItem("userId", userId);
+        localStorage.setItem("userId", rest.userId);
+        localStorage.setItem("role", rest.role);
 
-        return true;
+        return rest;
       });
   }
 

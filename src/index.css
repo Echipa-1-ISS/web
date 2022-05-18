@@ -27,3 +27,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.table-content .ant-table-thead > tr > th {
+  color: #fff;
+  background: #00152a !important;
+}

@@ -18,10 +18,13 @@ export const Login = () => {
   const submitHandler = (e: any) => {
     e.preventDefault();
     UserService.login(username, password)
-      .then(() => {
+      .then((data) => {
+        console.log(data);
         setUser({
           ...user,
           isAuthenticated: true,
+          role: data.role,
+          id: data.userId,
         });
         navigate(Route.Home);
       })

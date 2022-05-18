@@ -24,11 +24,12 @@ export const AddOptionalCourseModal = ({
   const { user } = useContext(UserContext);
 
   const handleSubmit = (data: AddOptionalCourseFormModel) => {
-    api.post(ApiEndpoints.courses.addOptionalCourse, {
-      ...data,
-      userId: user.id,
-    });
-    onOk();
+    api
+      .post(ApiEndpoints.courses.addOptionalCourse, {
+        ...data,
+        userId: user.id,
+      })
+      .then(onOk);
   };
 
   useEffect(() => {
