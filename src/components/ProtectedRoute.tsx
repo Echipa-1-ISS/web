@@ -25,7 +25,7 @@ export const ProtectedRoute = ({
   }, [user.role, authorizedRoles]);
 
   if (!user.isAuthenticated || !isAuthorized)
-    return <Navigate to={Route.Login} />;
+    return <Navigate to={Route.Home} />;
 
   return <>{children}</>;
 };

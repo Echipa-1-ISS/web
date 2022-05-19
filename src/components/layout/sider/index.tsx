@@ -47,6 +47,12 @@ const links = [
     label: "Approve courses",
     authorizedRoles: [Role.DepartmentChief],
   },
+  {
+    path: Route.TeacherGrades,
+    icon: <CheckIcon />,
+    label: "Manage grades",
+    authorizedRoles: [Role.Teacher, Role.DepartmentChief],
+  },
 ];
 
 export const Sider = () => {

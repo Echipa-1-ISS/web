@@ -123,6 +123,7 @@ export const CurriculumContent = () => {
             type="primary"
             style={{ float: "right" }}
             onClick={handleSubmit}
+            disabled={!year}
           >
             Add contract
           </Button>

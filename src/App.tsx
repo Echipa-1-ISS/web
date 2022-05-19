@@ -4,6 +4,7 @@ import {
   Routes,
   Route as RouteComponent,
 } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import { Layout } from "./components/layout";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { UserContext, getDefaultUser } from "./context/UserContext";
@@ -49,6 +50,7 @@ const App = () => {
           </Routes>
         </LayoutComponent>
       </UserContext.Provider>
+      <ToastContainer />
     </Router>
   );
 };

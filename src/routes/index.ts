@@ -7,6 +7,7 @@ import { CurriculumContent } from "../screens/student/curriculum";
 import { Courses } from "../screens/teacher/courses";
 import { OptionalCoursesContent } from "../screens/chief/optional-courses";
 import { Role } from "../enums/Role";
+import { TeacherGrades } from "../screens/teacher/grades";
 
 export const routes: RouteConfig[] = [
   {
@@ -27,6 +28,7 @@ export const routes: RouteConfig[] = [
     path: Route.Curriculum,
     component: CurriculumContent,
     isProtected: true,
+    authorizedRoles: [Role.Student],
   },
   {
     path: Route.OptionalCourses,
@@ -37,6 +39,12 @@ export const routes: RouteConfig[] = [
   {
     path: Route.Courses,
     component: Courses,
+    isProtected: true,
+    authorizedRoles: [Role.Teacher, Role.DepartmentChief],
+  },
+  {
+    path: Route.TeacherGrades,
+    component: TeacherGrades,
     isProtected: true,
     authorizedRoles: [Role.Teacher, Role.DepartmentChief],
   },

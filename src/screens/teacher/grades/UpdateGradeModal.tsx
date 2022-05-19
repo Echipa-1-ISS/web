@@ -1,8 +1,8 @@
 import { Button, Col, Form, Input, Modal, Row } from "antd";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 import api from "../../../api";
 import { ApiEndpoints } from "../../../api/endpoints";
-import { OptionalCourse } from "../../../models/OptionalCourse";
 
 const requiredField = { required: true, message: "This field is required" };
 
@@ -10,14 +10,14 @@ interface ApproveOptionalCourseModalProps {
   visible: boolean;
   onOk: () => void;
   onCancel: () => void;
-  course?: OptionalCourse;
+  enrolment?: any;
 }
 
-export const ApproveCourseModal = ({
+export const UpdateGradeModal = ({
   visible,
   onOk,
   onCancel,
-  course,
+  enrolment,
 }: ApproveOptionalCourseModalProps) => {
   const [form] = Form.useForm();
   useEffect(() => {
@@ -28,22 +28,29 @@ export const ApproveCourseModal = ({
 
   useEffect(() => {
     form.setFieldsValue({
-      name: course?.courseName,
+      studentName: enrolment?.studentName,
+      grade: enrolment?.grade ?? 0,
     });
-  }, [course]);
+  }, [enrolment]);
 
   const handleSubmit = (data: any) => {
     api
-      .post(ApiEndpoints.courses.approveCourse, {
-        courseId: course!.courseId,
-        maxStudents: Number(data.maxStudents),
+      .put(ApiEndpoints.grades.updateGrade, {
+        enrolmentId: Number(enrolment.enrolmentId),
+        grade: Number(data.grade),
       })
-      .then(onOk);
+      .then(() => {
+        toast("Grade updated successfully", {
+          type: "success",
+        });
+      })
+      .then(onOk)
+      .catch((e) => toast(e.message, { type: "error" }));
   };
 
   return (
     <Modal
-      title="Approve optional course"
+      title="Update student grade"
       visible={visible}
       onCancel={onCancel}
       footer={null}
@@ -54,20 +61,16 @@ export const ApproveCourseModal = ({
         wrapperCol={{ span: 18 }}
         form={form}
       >
-        <Form.Item label="Course name" name="name">
+        <Form.Item label="Student's name" name="studentName">
           <Input disabled />
         </Form.Item>
-        <Form.Item
-          label="Max students"
-          name="maxStudents"
-          rules={[requiredField]}
-        >
+        <Form.Item label="Grade" name="grade" rules={[requiredField]}>
           <Input type="number" />
         </Form.Item>
         <Row>
           <Col span={6} offset={18}>
             <Button type="primary" htmlType="submit">
-              Approve
+              Update grade
             </Button>
           </Col>
         </Row>

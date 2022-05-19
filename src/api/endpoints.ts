@@ -11,4 +11,9 @@ export const ApiEndpoints = {
   contract: {
     base: "/Contract",
   },
+  grades: {
+    getTeacherGrades: "/Grades/getTeacherGrades",
+    getStudentGrades: "/Grades/getStudentGrades",
+    updateGrade: "/Grades",
+  },
 };
