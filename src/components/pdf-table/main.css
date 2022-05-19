@@ -1,0 +1,10 @@
+div.table-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+div.download-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}

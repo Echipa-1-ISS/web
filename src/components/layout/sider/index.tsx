@@ -38,7 +38,7 @@ const links = [
   {
     path: Route.Courses,
     icon: <CheckIcon />,
-    label: "Courses",
+    label: "My Courses",
     authorizedRoles: [Role.Teacher, Role.DepartmentChief],
   },
   {
@@ -52,6 +52,24 @@ const links = [
     icon: <CheckIcon />,
     label: "Manage grades",
     authorizedRoles: [Role.Teacher, Role.DepartmentChief],
+  },
+  {
+    path: Route.Contracts,
+    icon: <FileIcon />,
+    label: "My contracts",
+    authorizedRoles: [Role.Student],
+  },
+  {
+    path: Route.ChiefCourses,
+    icon: <FileIcon />,
+    label: "Courses",
+    authorizedRoles: [Role.DepartmentChief],
+  },
+  {
+    path: Route.Teachers,
+    label: "Teachers",
+    icon: <HomeIcon />,
+    authorizedRoles: [Role.DepartmentChief],
   },
 ];
 

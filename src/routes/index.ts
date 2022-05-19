@@ -8,6 +8,10 @@ import { Courses } from "../screens/teacher/courses";
 import { OptionalCoursesContent } from "../screens/chief/optional-courses";
 import { Role } from "../enums/Role";
 import { TeacherGrades } from "../screens/teacher/grades";
+import { Home } from "../screens/home";
+import { Contracts } from "../screens/student/contracts/Contracts";
+import { Courses as ChiefCourses } from "../screens/chief/courses/Courses";
+import { Teachers } from "../screens/chief/teachers/Teachers";
 
 export const routes: RouteConfig[] = [
   {
@@ -47,5 +51,23 @@ export const routes: RouteConfig[] = [
     component: TeacherGrades,
     isProtected: true,
     authorizedRoles: [Role.Teacher, Role.DepartmentChief],
+  },
+  {
+    path: Route.Contracts,
+    component: Contracts,
+    isProtected: true,
+    authorizedRoles: [Role.Student],
+  },
+  {
+    path: Route.ChiefCourses,
+    component: ChiefCourses,
+    isProtected: true,
+    authorizedRoles: [Role.DepartmentChief],
+  },
+  {
+    path: Route.Teachers,
+    component: Teachers,
+    isProtected: true,
+    authorizedRoles: [Role.DepartmentChief],
   },
 ];

@@ -6,4 +6,5 @@ export interface TeacherCourse {
   semester: number;
   year: number;
   specialization: string;
+  teacher: string;
 }

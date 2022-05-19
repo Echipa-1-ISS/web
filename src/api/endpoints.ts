@@ -2,6 +2,7 @@ export const ApiEndpoints = {
   login: "/Users/login",
   userProfile: "/UserProfile",
   courses: {
+    base: "/Courses",
     getSemestersAndSpecializations: "/Courses/semestersAndSpecializations",
     addOptionalCourse: "/Courses/addOptional",
     getCourses: "/Courses/getCourses",
@@ -10,6 +11,10 @@ export const ApiEndpoints = {
   },
   contract: {
     base: "/Contract",
+    getStudentContracts: "/Contract/getStudentContracts",
+  },
+  teachers: {
+    base: "/Teachers",
   },
   grades: {
     getTeacherGrades: "/Grades/getTeacherGrades",
