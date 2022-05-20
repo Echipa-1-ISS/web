@@ -19,6 +19,7 @@ interface PdfTableProps {
   title: string;
   orientation?: "portrait" | "landscape";
   size?: number;
+  show?: boolean;
 }
 
 const defaultRenderMethod = (value: any) => value;
@@ -80,6 +81,7 @@ export const PdfTable = ({
   title,
   orientation,
   size = 14,
+  show = true,
 }: PdfTableProps) => {
   const styles = getStyles(columns, size);
 
@@ -90,7 +92,7 @@ export const PdfTable = ({
       ))}
     </View>
   );
-  console.log(dataSource);
+
   const TableContent = () => (
     <>
       {dataSource.map((x) => (
@@ -135,7 +137,7 @@ export const PdfTable = ({
           );
         }}
       </BlobProvider>
-      {Table}
+      {show ? Table : null}
     </div>
   );
 };

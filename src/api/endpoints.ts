@@ -21,4 +21,7 @@ export const ApiEndpoints = {
     getStudentGrades: "/Grades/getStudentGrades",
     updateGrade: "/Grades",
   },
+  reports: {
+    students: "/Reports/students",
+  },
 };

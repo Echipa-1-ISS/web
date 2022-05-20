@@ -12,6 +12,7 @@ import { Home } from "../screens/home";
 import { Contracts } from "../screens/student/contracts/Contracts";
 import { Courses as ChiefCourses } from "../screens/chief/courses/Courses";
 import { Teachers } from "../screens/chief/teachers/Teachers";
+import { StudentsReports } from "../screens/admin/students/Students";
 
 export const routes: RouteConfig[] = [
   {
@@ -62,12 +63,18 @@ export const routes: RouteConfig[] = [
     path: Route.ChiefCourses,
     component: ChiefCourses,
     isProtected: true,
-    authorizedRoles: [Role.DepartmentChief],
+    authorizedRoles: [Role.DepartmentChief, Role.Admin],
   },
   {
     path: Route.Teachers,
     component: Teachers,
     isProtected: true,
-    authorizedRoles: [Role.DepartmentChief],
+    authorizedRoles: [Role.DepartmentChief, Role.Admin],
+  },
+  {
+    path: Route.StudentsReport,
+    component: StudentsReports,
+    isProtected: true,
+    authorizedRoles: [Role.Admin],
   },
 ];

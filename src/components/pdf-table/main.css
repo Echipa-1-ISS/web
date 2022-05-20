@@ -7,4 +7,5 @@ div.table-wrapper {
 div.download-wrapper {
   display: flex;
   justify-content: flex-end;
+  margin-bottom: 32px;
 }

@@ -63,13 +63,19 @@ const links = [
     path: Route.ChiefCourses,
     icon: <FileIcon />,
     label: "Courses",
-    authorizedRoles: [Role.DepartmentChief],
+    authorizedRoles: [Role.DepartmentChief, Role.Admin],
   },
   {
     path: Route.Teachers,
     label: "Teachers",
     icon: <HomeIcon />,
-    authorizedRoles: [Role.DepartmentChief],
+    authorizedRoles: [Role.DepartmentChief, Role.Admin],
+  },
+  {
+    path: Route.StudentsReport,
+    label: "Student reports",
+    icon: <HomeIcon />,
+    authorizedRoles: [Role.Admin],
   },
 ];
 

@@ -9,4 +9,5 @@ export enum Route {
   TeacherGrades = "/teacher/grades",
   Contracts = "/contracts",
   Teachers = "/teachers",
+  StudentsReport = "/reports/students",
 }
